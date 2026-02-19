@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Instagram-like social media app with chat, stories, reels, follow system, and user account creation",
+  "architectural_notes": [
+    "Mobile app targeting Play Store deployment",
+    "Social media platform with user-generated content",
+    "Requires backend infrastructure for user data, media storage, and real-time messaging"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Modern gradient app logo icon with overlapping circles or camera motif in coral and teal tones (app-logo.dim_256x256.png)\n- Default profile picture placeholder with neutral avatar silhouette on soft gradient background (default-avatar.dim_200x200.png)\n- Empty state illustration for when user has no posts yet, minimalist line art style (no-posts-placeholder.dim_400x300.png)",
+  "existing_features": [
+    {
+      "id": "feature-implement-user-account-creation-and-authentication-system-with-internet-identity-integration-allowing-users-to-create-unique-profiles-with-username-profile-picture-and-bio",
+      "title": "Implement user account creation and authentication system with Internet Identity integration allowing users to create unique profiles with username, profile picture, and bio",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-real-time-chat-messaging-system-enabling-users-to-send-and-receive-text-messages-with-other-users-in-private-one-on-one-conversations",
+      "title": "Create a real-time chat messaging system enabling users to send and receive text messages with other users in private one-on-one conversations",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-stories-feature-allowing-users-to-post-temporary-photo-content-that-expires-after-24-hours-and-is-viewable-by-their-followers",
+      "title": "Implement a stories feature allowing users to post temporary photo content that expires after 24 hours and is viewable by their followers",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-reels-feature-for-users-to-post-and-view-short-form-video-content-with-a-vertical-scrolling-feed-interface",
+      "title": "Create a reels feature for users to post and view short-form video content with a vertical scrolling feed interface",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-follow-unfollow-system-allowing-users-to-follow-and-unfollow-other-users-with-follower-and-following-counts-displayed-on-profiles",
+      "title": "Build a follow/unfollow system allowing users to follow and unfollow other users, with follower and following counts displayed on profiles",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-a-vibrant-modern-social-media-interface-with-engaging-colors-and-clean-typography-that-creates-a-welcoming-energetic-atmosphere-suitable-for-a-content-sharing-platform",
+      "title": "Design a vibrant, modern social media interface with engaging colors and clean typography that creates a welcoming, energetic atmosphere suitable for a content-sharing platform",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-home-feed-displaying-posts-reels-and-stories-from-followed-users-in-a-scrollable-timeline-with-navigation-to-other-sections-like-chat-profile-and-explore",
+      "title": "Create a home feed displaying posts, reels, and stories from followed users in a scrollable timeline with navigation to other sections like chat, profile, and explore",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-placeholder-profile-pictures-and-app-branding-assets-as-static-frontend-assets",
+      "title": "Render placeholder profile pictures and app branding assets as static frontend assets",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "User account creation and authentication system",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Chat messaging between users",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Stories feature for posting temporary content",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Reels feature for short video content",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Follow/unfollow system for connecting users",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Social Connect",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

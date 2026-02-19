@@ -1,0 +1,315 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Social Connect - Instagram-like Social Media App Frontend",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement user authentication with Internet Identity and profile management UI allowing users to create and edit profiles with username, profile picture, and bio",
+      "acceptanceCriteria": [
+        "Users can create accounts through Internet Identity",
+        "Each user has a unique username",
+        "Users can set and update profile pictures",
+        "Users can add and edit a bio/description",
+        "Profile information is stored persistently"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LoginButton.tsx",
+          "operation": "create",
+          "description": "Create login/logout button component using the authorization component for Internet Identity authentication. Handle login state transitions and query cache clearing on logout. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Create modal for first-time profile setup prompting users to enter username, display name, bio, and upload profile picture using ExternalBlob from blob-storage component. Wire the generated default-avatar.dim_200x200.png from frontend/public/assets/generated/default-avatar.dim_200x200.png as the default placeholder. Show this modal only when user is authenticated but has no profile (check getCallerUserProfile returns null). Verify the authorization and blob-storage component usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/EditProfileModal.tsx",
+          "operation": "create",
+          "description": "Create modal for editing existing user profile allowing updates to username, display name, bio, and profile picture. Pre-populate fields with current profile data. Handle image upload using ExternalBlob from blob-storage component with upload progress tracking. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useGetCallerUserProfile.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch current user's profile using getCallerUserProfile backend method. Implement proper loading states to prevent profile setup modal flash as specified in authorization component usage. Return isLoading that accounts for actor fetching state and isFetched that checks actor availability. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useSaveCallerUserProfile.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to save current user's profile using saveCallerUserProfile backend method. Invalidate currentUserProfile query on success. Handle errors gracefully with user-facing error messages."
+        },
+        {
+          "path": "frontend/src/hooks/useGetUserProfile.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch other users' profiles by Principal using getUserProfile backend method. Support fetching multiple user profiles with query key including the Principal parameter."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Create chat messaging UI enabling users to send and receive text messages in private one-on-one conversations with conversation list and message history views",
+      "acceptanceCriteria": [
+        "Users can initiate chat conversations with other users",
+        "Messages are delivered and displayed in chronological order",
+        "Chat history is preserved and retrievable",
+        "Users can view their list of active conversations",
+        "Message timestamps are displayed"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ChatPage.tsx",
+          "operation": "create",
+          "description": "Create chat page showing list of conversations and active chat view. Display conversation list with user profile pictures and last message preview. When a conversation is selected, show message thread with chronological message display and input field for new messages. Use getMessages backend method to fetch conversation history. Format timestamps for message display."
+        },
+        {
+          "path": "frontend/src/components/ConversationList.tsx",
+          "operation": "create",
+          "description": "Create component displaying list of active chat conversations. Show user profile pictures, usernames, and message previews. Handle conversation selection to open the chat thread. Support empty state when no conversations exist."
+        },
+        {
+          "path": "frontend/src/components/ChatThread.tsx",
+          "operation": "create",
+          "description": "Create component displaying message thread for selected conversation. Show messages in chronological order with sender identification, message text, and formatted timestamps. Distinguish between sent and received messages visually. Include message input field at bottom to send new messages."
+        },
+        {
+          "path": "frontend/src/components/MessageInput.tsx",
+          "operation": "create",
+          "description": "Create message input component with text field and send button. Handle message submission using sendMessage backend method with recipient Principal and message text. Clear input after successful send and provide user feedback."
+        },
+        {
+          "path": "frontend/src/hooks/useGetMessages.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch messages between current user and another user using getMessages backend method. Accept Principal parameter for the other user. Enable polling or refetch to simulate updates since real-time is not supported."
+        },
+        {
+          "path": "frontend/src/hooks/useSendMessage.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to send messages using sendMessage backend method. Invalidate messages query on success to refresh chat thread. Handle errors with user-facing feedback."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Implement stories UI allowing users to post temporary photo content that expires after 24 hours and view stories from followed users",
+      "acceptanceCriteria": [
+        "Users can upload and post story images",
+        "Stories automatically expire and disappear after 24 hours",
+        "Users can view stories from accounts they follow",
+        "Story viewer shows who posted and when",
+        "Multiple stories from the same user are grouped together"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/StoriesBar.tsx",
+          "operation": "create",
+          "description": "Create horizontal stories bar component showing story thumbnails from followed users grouped by author. Display user profile pictures with ring indicator for unviewed stories. Include button to add own story. Handle story selection to open full-screen story viewer. Fetch stories using getAllStories backend method and filter for non-expired stories from followed users."
+        },
+        {
+          "path": "frontend/src/components/StoryViewer.tsx",
+          "operation": "create",
+          "description": "Create full-screen story viewer modal displaying story images with author information and timestamp. Support navigation between stories from the same user and between different users. Show progress indicators for multiple stories. Display story content using ExternalBlob.getDirectURL() for image rendering. Include close button to exit viewer. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AddStoryModal.tsx",
+          "operation": "create",
+          "description": "Create modal for uploading and posting a new story. Include image upload interface using ExternalBlob from blob-storage component with upload progress tracking. Show image preview before posting. Submit using addStory backend method with ExternalBlob content. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useGetAllStories.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch all stories using getAllStories backend method. Filter out expired stories on the frontend by comparing expiresAt timestamps with current time. Enable periodic refetching to show new stories."
+        },
+        {
+          "path": "frontend/src/hooks/useAddStory.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to add stories using addStory backend method. Accept ExternalBlob content parameter. Invalidate stories query on success. Handle errors with user-facing messages."
+        },
+        {
+          "path": "frontend/src/hooks/useDeleteStory.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to delete stories using deleteStory backend method. Accept story ID parameter. Invalidate stories query on success. Only allow deletion of own stories by comparing story author with current user Principal."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Create reels UI for users to post and view short-form video content with a vertical scrolling feed interface",
+      "acceptanceCriteria": [
+        "Users can upload video content as reels",
+        "Reels are displayed in a dedicated vertical scrolling feed",
+        "Each reel shows the creator's username and profile picture",
+        "Users can like and view engagement metrics on reels",
+        "Reels persist indefinitely on user profiles"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ReelsPage.tsx",
+          "operation": "create",
+          "description": "Create reels feed page with vertical scrolling layout. Display reels full-screen with video player using ExternalBlob.getDirectURL() for video streaming. Show creator username, profile picture, caption, and timestamp overlay on each reel. Fetch reels using getAllReels backend method. Support scroll navigation between reels. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ReelCard.tsx",
+          "operation": "create",
+          "description": "Create reel card component displaying individual reel with video player, author information, caption, and timestamp. Render video using ExternalBlob.getDirectURL() in video element. Show author profile picture and username with link to profile. Display caption text overlay. Include play/pause controls. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AddReelModal.tsx",
+          "operation": "create",
+          "description": "Create modal for uploading and posting a new reel. Include video upload interface using ExternalBlob from blob-storage component with upload progress tracking. Add caption input field. Show video preview before posting. Submit using addReel backend method with ExternalBlob video and caption text. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useGetAllReels.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch all reels using getAllReels backend method. Enable periodic refetching to show new reels. Support sorting by timestamp."
+        },
+        {
+          "path": "frontend/src/hooks/useAddReel.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to add reels using addReel backend method. Accept ExternalBlob video and caption string parameters. Invalidate reels query on success. Handle errors with user-facing messages."
+        },
+        {
+          "path": "frontend/src/hooks/useDeleteReel.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to delete reels using deleteReel backend method. Accept reel ID parameter. Invalidate reels query on success. Only allow deletion of own reels by comparing reel author with current user Principal."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Build follow/unfollow UI allowing users to follow and unfollow other users with follower and following counts displayed on profiles and viewable lists",
+      "acceptanceCriteria": [
+        "Users can follow other users with a single action",
+        "Users can unfollow users they are currently following",
+        "Follower count is displayed on user profiles",
+        "Following count is displayed on user profiles",
+        "Users can view lists of their followers and following"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/FollowButton.tsx",
+          "operation": "create",
+          "description": "Create follow/unfollow button component showing current follow state and toggling between follow and unfollow actions. Use followUser and unfollowUser backend methods. Disable button during mutation. Show loading state during action. Update button text and styling based on follow status."
+        },
+        {
+          "path": "frontend/src/components/FollowersModal.tsx",
+          "operation": "create",
+          "description": "Create modal displaying list of followers for a user. Fetch followers using getFollowers backend method with user Principal. Show each follower's profile picture, username, and follow button. Support navigation to follower profiles. Display empty state when no followers exist."
+        },
+        {
+          "path": "frontend/src/components/FollowingModal.tsx",
+          "operation": "create",
+          "description": "Create modal displaying list of users being followed. Fetch following list using getFollowing backend method with user Principal. Show each followed user's profile picture, username, and unfollow option. Support navigation to followed user profiles. Display empty state when not following anyone."
+        },
+        {
+          "path": "frontend/src/hooks/useFollowUser.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to follow users using followUser backend method. Accept target Principal parameter. Invalidate user profile and followers/following queries on success. Handle errors with user-facing messages."
+        },
+        {
+          "path": "frontend/src/hooks/useUnfollowUser.ts",
+          "operation": "create",
+          "description": "Create React Query mutation hook to unfollow users using unfollowUser backend method. Accept target Principal parameter. Invalidate user profile and followers/following queries on success. Handle errors with user-facing messages."
+        },
+        {
+          "path": "frontend/src/hooks/useGetFollowers.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch followers list using getFollowers backend method. Accept user Principal parameter. Return array of Principal representing followers."
+        },
+        {
+          "path": "frontend/src/hooks/useGetFollowing.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch following list using getFollowing backend method. Accept user Principal parameter. Return array of Principal representing followed users."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Design vibrant, modern social media interface with engaging colors and clean typography creating a welcoming atmosphere",
+      "acceptanceCriteria": [
+        "Visual design uses a cohesive color palette with warm, inviting tones",
+        "Typography is clear and readable across all screen sizes",
+        "Layout follows modern social media design patterns",
+        "Interactive elements have clear visual feedback",
+        "Overall aesthetic feels fresh and contemporary"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Update global styles with vibrant color palette featuring coral, teal, and warm tones for social media branding. Define CSS custom properties for primary colors (coral #FF6B6B), secondary colors (teal #4ECDC4), accent colors, neutral grays, and semantic colors (success, warning, error). Set modern typography with readable font stack. Add base styles for interactive elements with hover/active states and smooth transitions."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind configuration with custom color palette matching the vibrant social media theme. Add coral primary colors, teal secondary colors, and warm accent tones. Configure custom font families for headings and body text. Add custom spacing and border radius values for modern social media aesthetic. Define animation utilities for interactive feedback."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "create",
+          "description": "Create main layout component with navigation bar, content area, and responsive structure. Apply vibrant color scheme with coral/teal accents. Include app logo from frontend/public/assets/generated/app-logo.dim_256x256.png in the navigation. Provide consistent spacing and modern social media layout patterns. Support mobile-responsive breakpoints."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Create home feed page displaying posts, reels, and stories from followed users with navigation to chat, profile, and explore sections",
+      "acceptanceCriteria": [
+        "Home feed displays content from followed users",
+        "Navigation bar provides access to all major app sections",
+        "Content is organized in a clear, scrollable format",
+        "User can easily switch between different content types",
+        "Feed updates when new content is available"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "create",
+          "description": "Create home feed page displaying stories bar at top and scrollable feed of content from followed users. Include reels preview section. Show empty state with frontend/public/assets/generated/no-posts-placeholder.dim_400x300.png when no content is available. Fetch stories and reels, filtering for followed users only. Enable pull-to-refresh or periodic refetch for new content."
+        },
+        {
+          "path": "frontend/src/pages/ProfilePage.tsx",
+          "operation": "create",
+          "description": "Create profile page displaying user information including profile picture, username, display name, bio, follower count, and following count. Show edit profile button for own profile. Display user's reels in grid layout. Include tabs or sections for different content types. Show followers/following modals when counts are clicked. Use useGetUserProfile hook for other users and useGetCallerUserProfile for own profile."
+        },
+        {
+          "path": "frontend/src/pages/ExplorePage.tsx",
+          "operation": "create",
+          "description": "Create explore page displaying grid of all reels and stories for discovery. Show content from all users, not just followed accounts. Include search or filter capabilities. Use getAllReels and getAllStories backend methods to fetch all content."
+        },
+        {
+          "path": "frontend/src/components/NavigationBar.tsx",
+          "operation": "create",
+          "description": "Create navigation bar component with links to Home, Explore, Reels, Chat, and Profile sections. Show app logo from frontend/public/assets/generated/app-logo.dim_256x256.png. Include LoginButton component for authentication. Apply vibrant color scheme. Support mobile-responsive layout with bottom navigation on small screens."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire all pages into the app router. Register routes for HomePage (/), ExplorePage (/explore), ReelsPage (/reels), ChatPage (/chat), and ProfilePage (/profile/:principal). Wrap routes with Layout component for consistent navigation. Add authentication guards requiring login before showing any content pages. Show ProfileSetupModal when authenticated user has no profile. Handle authorization errors gracefully."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Render placeholder profile pictures and app branding assets as static frontend assets",
+      "acceptanceCriteria": [
+        "Generated images are served from frontend/public/assets/generated",
+        "Default profile picture placeholder is available",
+        "App logo and branding assets are integrated into the UI",
+        "Images load properly across all views"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ProfilePicture.tsx",
+          "operation": "create",
+          "description": "Create profile picture component that displays user profile images using ExternalBlob.getDirectURL() for uploaded pictures or frontend/public/assets/generated/default-avatar.dim_200x200.png as fallback when no profile picture exists. Support different sizes (small, medium, large) for various UI contexts. Handle loading and error states gracefully. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/EmptyState.tsx",
+          "operation": "create",
+          "description": "Create empty state component displaying frontend/public/assets/generated/no-posts-placeholder.dim_400x300.png with message text when users have no content. Accept customizable message prop. Use in feed views, profile sections, and conversation lists when no data exists."
+        }
+      ]
+    }
+  ]
+}

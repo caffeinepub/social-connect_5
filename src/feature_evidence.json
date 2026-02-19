@@ -1,0 +1,182 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-user-account-creation-and-authentication-system-with-internet-identity-integration-allowing-users-to-create-unique-profiles-with-username-profile-picture-and-bio",
+      "featureTitle": "Implement user account creation and authentication system with Internet Identity integration allowing users to create unique profiles with username, profile picture, and bio",
+      "files": [
+        "frontend/src/components/EditProfileModal.tsx",
+        "frontend/src/components/LoginButton.tsx",
+        "frontend/src/components/ProfileSetupModal.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-real-time-chat-messaging-system-enabling-users-to-send-and-receive-text-messages-with-other-users-in-private-one-on-one-conversations",
+      "featureTitle": "Create a real-time chat messaging system enabling users to send and receive text messages with other users in private one-on-one conversations",
+      "files": [
+        "frontend/src/components/ChatThread.tsx",
+        "frontend/src/components/ConversationList.tsx",
+        "frontend/src/components/MessageInput.tsx",
+        "frontend/src/pages/ChatPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-stories-feature-allowing-users-to-post-temporary-photo-content-that-expires-after-24-hours-and-is-viewable-by-their-followers",
+      "featureTitle": "Implement a stories feature allowing users to post temporary photo content that expires after 24 hours and is viewable by their followers",
+      "files": [
+        "frontend/src/components/AddStoryModal.tsx",
+        "frontend/src/components/StoriesBar.tsx",
+        "frontend/src/components/StoryViewer.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-reels-feature-for-users-to-post-and-view-short-form-video-content-with-a-vertical-scrolling-feed-interface",
+      "featureTitle": "Create a reels feature for users to post and view short-form video content with a vertical scrolling feed interface",
+      "files": [
+        "frontend/src/components/AddReelModal.tsx",
+        "frontend/src/components/ReelCard.tsx",
+        "frontend/src/pages/ReelsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-follow-unfollow-system-allowing-users-to-follow-and-unfollow-other-users-with-follower-and-following-counts-displayed-on-profiles",
+      "featureTitle": "Build a follow/unfollow system allowing users to follow and unfollow other users, with follower and following counts displayed on profiles",
+      "files": [
+        "frontend/src/components/FollowButton.tsx",
+        "frontend/src/components/FollowersModal.tsx",
+        "frontend/src/components/FollowingModal.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-design-a-vibrant-modern-social-media-interface-with-engaging-colors-and-clean-typography-that-creates-a-welcoming-energetic-atmosphere-suitable-for-a-content-sharing-platform",
+      "featureTitle": "Design a vibrant, modern social media interface with engaging colors and clean typography that creates a welcoming, energetic atmosphere suitable for a content-sharing platform",
+      "files": [
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-home-feed-displaying-posts-reels-and-stories-from-followed-users-in-a-scrollable-timeline-with-navigation-to-other-sections-like-chat-profile-and-explore",
+      "featureTitle": "Create a home feed displaying posts, reels, and stories from followed users in a scrollable timeline with navigation to other sections like chat, profile, and explore",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/ExplorePage.tsx",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/pages/ProfilePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-render-placeholder-profile-pictures-and-app-branding-assets-as-static-frontend-assets",
+      "featureTitle": "Render placeholder profile pictures and app branding assets as static frontend assets",
+      "files": [
+        "frontend/src/components/EmptyState.tsx",
+        "frontend/src/components/ProfilePicture.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
